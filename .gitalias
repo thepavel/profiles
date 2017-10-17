@@ -1,0 +1,34 @@
+[alias]
+############### PROCESS #############
+
+	st = status
+
+	# Shorter alias for 'git checkout'
+	co = checkout
+
+	# Shorter alias for 'git checkout -b'
+	cob = checkout -b
+
+	# Updates the current branch and removes remote branches that have been removed on the remote
+	# e.g. 'git up'
+	up = pull --rebase --prune
+
+	# Updates the current branch when you have local changes you need to stash and pop after the update
+	# otherwise identical to `git up`
+	# e.g. 'git sup'
+	sup = "!git stash && git up && git stash pop"
+
+	# Checks out an existing branch and updates it from its upstream branch so it's up to date
+	# e.g. 'git cup TICKET-122'
+	cup = "!git checkout $1 && git up"
+
+	# Starts development on a new feature branch derived from the current master branch
+	# e.g. 'git start TICKET-121'
+	# or 'git start TICKET-121 dev' if the base branch should not be master
+	start = "!f() { git checkout ${2:-master} && git up && git checkout -b $1; }; f"
+
+	# Gets the current branch name
+	current-branch = rev-parse --abbrev-ref HEAD
+
+	# The repo url of the origin remote
+	origin-url = config --get remote.origin.url
